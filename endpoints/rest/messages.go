@@ -43,7 +43,7 @@ func (cc messagesController) post(wr http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	wr.WriteHeader(http.StatusOK)
+	wr.WriteHeader(http.StatusAccepted)
 	wr.Write([]byte(id))
 }
 
