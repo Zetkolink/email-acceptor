@@ -5,10 +5,11 @@ import (
 )
 
 type MessageRequest struct {
-	Sender  string   `json:"sender"`
-	To      []string `json:"to"`
-	Subject *string  `json:"subject"`
-	Message string   `json:"message"`
+	UniqueId *string  `json:"unique_id"`
+	Sender   string   `json:"sender"`
+	To       []string `json:"to"`
+	Subject  *string  `json:"subject"`
+	Message  string   `json:"message"`
 }
 
 func (m MessageRequest) Validate() error {
