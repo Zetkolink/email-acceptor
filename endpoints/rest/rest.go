@@ -22,6 +22,9 @@ func New(logger logger.Logger, ms *store.MessageStore) http.Handler {
 	router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
 	router.MethodNotAllowedHandler = http.HandlerFunc(methodNotAllowedHandler)
 
+	sh := http.StripPrefix("/docs/", http.FileServer(http.Dir("./dist/")))
+	router.PathPrefix("/docs/").Handler(sh)
+
 	// setup api endpoints
 	addMessagesApi(router, ms, logger)
 

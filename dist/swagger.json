@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mail.",
+    "version": "3.0"
+  },
+  "paths": {
+    "/notifs/": {
+      "post": {
+        "tags": [
+          "Mail / Send"
+        ],
+        "summary": "Отправить письмо.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "sender",
+                  "to",
+                  "message"
+                ],
+                "properties": {
+                  "sender": {
+                    "type": "string",
+                    "description": "Мейл отправителя.",
+                    "example": "z.chalimov@yandex.ru"
+                  },
+                  "to": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "Мейл получателя.",
+                      "example": "z.chalimov@yandex.ru"
+                    }
+                  },
+                  "subject": {
+                    "type": "string",
+                    "description": "Тема письма.",
+                    "example": "test"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Текст письма.",
+                    "example": "test"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Принято на отправку.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ewtgkdsjfgklqkddasd",
+                      "description": "Id отправленного письма."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка данных запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Ошибка"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifs": {
+      "get": {
+        "tags": [
+          "Mail / Get"
+        ],
+        "summary": "Получить отправленные письма.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The number of items to skip before starting to collect the result set"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The numbers of items to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Принято на отправку.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "ewtgkdsjfgklqkddasd",
+                        "description": "Id отправленного письма."
+                      },
+                      "sender": {
+                        "type": "string",
+                        "description": "Мейл отправителя.",
+                        "example": "z.chalimov@yandex.ru"
+                      },
+                      "to": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "description": "Мейл получателя.",
+                          "example": "z.chalimov@yandex.ru"
+                        }
+                      },
+                      "subject": {
+                        "type": "string",
+                        "description": "Тема письма.",
+                        "example": "test"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Текст письма.",
+                        "example": "test"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "Дата отправки.",
+                        "example": "2020-01-10T12:27:12Z"
+                      },
+                      "state": {
+                        "type": "boolean",
+                        "description": "Статус",
+                        "example": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка данных запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Ошибка"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifs/{id}": {
+      "get": {
+        "tags": [
+          "Mail / Get"
+        ],
+        "summary": "Получить отправленные письма.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID письма"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Принято на отправку.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ewtgkdsjfgklqkddasd",
+                      "description": "Id отправленного письма."
+                    },
+                    "sender": {
+                      "type": "string",
+                      "description": "Мейл отправителя.",
+                      "example": "z.chalimov@yandex.ru"
+                    },
+                    "to": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Мейл получателя.",
+                        "example": "z.chalimov@yandex.ru"
+                      }
+                    },
+                    "subject": {
+                      "type": "string",
+                      "description": "Тема письма.",
+                      "example": "test"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Текст письма.",
+                      "example": "test"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "Дата отправки.",
+                      "example": "2020-01-10T12:27:12Z"
+                    },
+                    "state": {
+                      "type": "boolean",
+                      "description": "Статус",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка данных запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Ошибка"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
