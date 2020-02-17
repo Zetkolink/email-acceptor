@@ -18,8 +18,7 @@ func respond(wr http.ResponseWriter, status int, v interface{}) {
 
 func respondErr(wr http.ResponseWriter, err error) {
 	resp := models.Failed{Error: err.Error()}
-	respJson, err := json.Marshal(resp)
-	respond(wr, http.StatusBadRequest, respJson)
+	respond(wr, http.StatusBadRequest, resp)
 }
 
 func readRequest(req *http.Request, v interface{}) error {
