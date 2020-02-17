@@ -1,0 +1,12 @@
+db:
+  user: ""
+  pass: ""
+  name: ""
+  host: ""
+rb:
+  amqp: ""
+  queue: "test"
+  exchange: "test-exchange"
+logLevel: "debug"
+logFormat: "text"
+addr: ":3000"
